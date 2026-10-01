@@ -1,0 +1,405 @@
+// Isolated Mock Data Layer (Follows TypeScript Domain Interfaces)
+// To be replaced by Node.js + Neon PostgreSQL backend in future phase.
+
+import { CURRENT_USER } from "@/lib/const";
+import type {
+  DailyEntry,
+  DashboardSummary,
+  Goal,
+  HeatmapDay,
+  ProgressChartPoint,
+  Task,
+} from "@/lib/types";
+
+export const MOCK_GOALS: Goal[] = [
+  {
+    id: "goal_01",
+    title: "Master AWS Solutions Architect",
+    description: "Build robust cloud infrastructure and achieve associate certification",
+    categoryId: "study",
+    progress: 42,
+    targetDate: "2026-11-15",
+    status: "active",
+    tasks: [
+      { id: "gt_01", title: "EC2 Core Compute & Auto Scaling", completed: true },
+      { id: "gt_02", title: "S3 Storage Classes & Lifecycle Policies", completed: true },
+      { id: "gt_03", title: "IAM Roles, Policies & Permission Boundaries", completed: false },
+      { id: "gt_04", title: "VPC Subnets, Route Tables & NAT Gateways", completed: false },
+    ],
+  },
+  {
+    id: "goal_02",
+    title: "10K Endurance & Athletic Conditioning",
+    description: "Build cardiovascular engine and sub-50 minute 10km pace",
+    categoryId: "workout",
+    progress: 65,
+    targetDate: "2026-10-31",
+    status: "active",
+    tasks: [
+      { id: "gt_05", title: "5KM Baseline under 24 minutes", completed: true },
+      { id: "gt_06", title: "Sprint Interval Training 4x400m", completed: true },
+      { id: "gt_07", title: "Zone 2 Long Sunday Run (8km)", completed: false },
+    ],
+  },
+  {
+    id: "goal_03",
+    title: "Fluent Professional English Articulation",
+    description: "Master confident tech debates and articulate speaking without pauses",
+    categoryId: "communication",
+    progress: 78,
+    targetDate: "2026-10-20",
+    status: "active",
+    tasks: [
+      { id: "gt_08", title: "Daily 20-min impromptu speech recordings", completed: true },
+      { id: "gt_09", title: "50 Advanced technical vocabulary in context", completed: true },
+      { id: "gt_10", title: "Deliver 15-min live architecture presentation", completed: false },
+    ],
+  },
+];
+
+export const MOCK_PENDING_TASKS: Task[] = [
+  {
+    id: "task_01",
+    title: "AWS VPC Subnets & NAT Gateway Config",
+    categoryId: "study",
+    status: "pending",
+    priority: "High",
+    dueDate: "2026-10-01",
+    timeEstimate: "45m",
+    notes: "Review CIDR block allocations and public vs private route tables.",
+  },
+  {
+    id: "task_02",
+    title: "Night Skin Protocol (Cleanser + Retinol 0.2%)",
+    categoryId: "skincare",
+    status: "pending",
+    priority: "Medium",
+    dueDate: "2026-10-01",
+    timeEstimate: "10m",
+  },
+  {
+    id: "task_03",
+    title: "Log Dinner & Ensure 3L Hydration Target",
+    categoryId: "food",
+    status: "pending",
+    priority: "Low",
+    dueDate: "2026-10-01",
+    timeEstimate: "5m",
+  },
+];
+
+export const MOCK_DAILY_ENTRY_TODAY: DailyEntry = {
+  id: "entry_2026_10_01",
+  date: "2026-10-01",
+  overallProgress: 72,
+  completedTasksCount: 8,
+  pendingTasksCount: 3,
+  streakDays: 7,
+  dailyNote:
+    "Strong focus morning on React architecture and upper body training. Need to finish AWS networking before midnight.",
+  communication: {
+    completed: true,
+    activity: "Speech Articulation & Vocal Projection",
+    durationMinutes: 25,
+    skills: ["Speaking", "English Practice", "Vocabulary"],
+    vocabLearned: ["Substantiate", "Pragmatic", "Concomitant"],
+    notes: "Spoke on distributed caching trade-offs for 15 minutes continuously without hesitation.",
+  },
+  expense: {
+    items: [
+      {
+        id: "exp_1",
+        date: "2026-10-01",
+        amount: 180,
+        category: "Food",
+        description: "Nutritious Protein Lunch (Paneer Bowl)",
+        paymentMethod: "UPI / GPay",
+        isEssential: true,
+      },
+      {
+        id: "exp_2",
+        date: "2026-10-01",
+        amount: 50,
+        category: "Travel",
+        description: "Metro Commute Pass",
+        paymentMethod: "UPI / GPay",
+        isEssential: true,
+      },
+      {
+        id: "exp_3",
+        date: "2026-10-01",
+        amount: 150,
+        category: "Study",
+        description: "System Design Digital Whiteboard Add-on",
+        paymentMethod: "Credit Card",
+        isEssential: false,
+      },
+    ],
+    dailyTotal: 380,
+    monthlyTotal: 8450,
+    budget: 25000,
+    remainingBudget: 16550,
+  },
+  food: {
+    breakfast: true,
+    lunch: true,
+    dinner: false,
+    snacksHealthy: true,
+    waterLiters: 2.8,
+    fruitsVeggies: true,
+    notes: "Oats, almonds, whey isolate morning. Clean paneer salad lunch.",
+  },
+  skincare: {
+    morningRoutine: true,
+    nightRoutine: false,
+    sunscreen: true,
+    sleepHours: 7.5,
+    notes: "Applied Vitamin C serum and SPF 50 sunscreen before morning walk.",
+  },
+  study: {
+    completed: true,
+    studyTimeMinutes: 165,
+    topics: ["React 19 Server Components", "TypeScript Type Guards", "Cloud Architecture"],
+    tasks: [
+      {
+        id: "st_01",
+        title: "React Server Components Data Hydration",
+        categoryId: "study",
+        status: "completed",
+        priority: "High",
+        dueDate: "2026-10-01",
+      },
+      {
+        id: "st_02",
+        title: "Deep dive into TypeScript Mapped Types",
+        categoryId: "study",
+        status: "completed",
+        priority: "Medium",
+        dueDate: "2026-10-01",
+      },
+      {
+        id: "st_03",
+        title: "AWS VPC Subnets & Route Tables",
+        categoryId: "study",
+        status: "pending",
+        priority: "High",
+        dueDate: "2026-10-01",
+      },
+    ],
+    goals: MOCK_GOALS,
+    notes: "Solid deep work block completed in the morning. Evening session will cover networking.",
+  },
+  workout: {
+    completed: true,
+    type: "Upper Body Hypertrophy",
+    durationMinutes: 48,
+    exercises: [
+      { name: "Incline Dumbbell Press", sets: 4, reps: 10, weightKg: 28 },
+      { name: "Weighted Pull-ups", sets: 4, reps: 8, weightKg: 10 },
+      { name: "Overhead Military Press", sets: 3, reps: 10, weightKg: 40 },
+      { name: "Cable Lateral Raises", sets: 4, reps: 15, weightKg: 12 },
+    ],
+    caloriesBurned: 345,
+    notes: "Strong mind-muscle connection. Reached 28kg dumbbells on incline press.",
+  },
+};
+
+export const MOCK_DAILY_ENTRIES: Record<string, DailyEntry> = {
+  "2026-10-01": MOCK_DAILY_ENTRY_TODAY,
+  "2026-09-30": {
+    ...MOCK_DAILY_ENTRY_TODAY,
+    id: "entry_2026_09_30",
+    date: "2026-09-30",
+    overallProgress: 84,
+    completedTasksCount: 10,
+    pendingTasksCount: 1,
+    streakDays: 6,
+    dailyNote: "One of the best productive days this month. Crushed workout and study sessions.",
+    food: { ...MOCK_DAILY_ENTRY_TODAY.food, dinner: true, waterLiters: 3.2 },
+    skincare: { ...MOCK_DAILY_ENTRY_TODAY.skincare, nightRoutine: true },
+    study: {
+      ...MOCK_DAILY_ENTRY_TODAY.study,
+      studyTimeMinutes: 210,
+      tasks: MOCK_DAILY_ENTRY_TODAY.study.tasks.map((t) => ({ ...t, status: "completed" as const })),
+    },
+  },
+  "2026-09-29": {
+    ...MOCK_DAILY_ENTRY_TODAY,
+    id: "entry_2026_09_29",
+    date: "2026-09-29",
+    overallProgress: 68,
+    completedTasksCount: 7,
+    pendingTasksCount: 4,
+    streakDays: 5,
+    dailyNote: "Slight fatigue in the afternoon, but completed communication drills and clean meals.",
+  },
+};
+
+export const MOCK_DASHBOARD_SUMMARY: DashboardSummary = {
+  user: CURRENT_USER,
+  selectedDate: "2026-10-01",
+  overallProgress: 72,
+  completedTasksToday: 8,
+  pendingTasksToday: 3,
+  currentStreak: 7,
+  studyHoursToday: 2.75,
+  workoutCompletedToday: true,
+  expensesToday: 380,
+  categories: [
+    {
+      id: "communication",
+      name: "Communication",
+      completionPercentage: 78,
+      shortSummary: "25 min speaking practice & 3 vocab",
+      status: "Completed",
+      currentValue: 25,
+      targetValue: 30,
+      unit: "min",
+    },
+    {
+      id: "expense",
+      name: "Expense",
+      completionPercentage: 85,
+      shortSummary: "Spent ₹380 / ₹1,000 daily budget",
+      status: "In Progress",
+      currentValue: 380,
+      targetValue: 1000,
+      unit: "₹",
+    },
+    {
+      id: "food",
+      name: "Food Routine",
+      completionPercentage: 80,
+      shortSummary: "Breakfast & lunch logged, 2.8L water",
+      status: "In Progress",
+      currentValue: 4,
+      targetValue: 5,
+      unit: "habits",
+    },
+    {
+      id: "skincare",
+      name: "Skin Care",
+      completionPercentage: 75,
+      shortSummary: "Morning protocol done, night pending",
+      status: "In Progress",
+      currentValue: 3,
+      targetValue: 4,
+      unit: "steps",
+    },
+    {
+      id: "study",
+      name: "Study & Goals",
+      completionPercentage: 70,
+      shortSummary: "2h 45m deep study, 2 tasks done",
+      status: "In Progress",
+      currentValue: 2.75,
+      targetValue: 3.5,
+      unit: "hrs",
+    },
+    {
+      id: "workout",
+      name: "Workout",
+      completionPercentage: 100,
+      shortSummary: "Upper Body Hypertrophy (48 min)",
+      status: "Completed",
+      currentValue: 48,
+      targetValue: 45,
+      unit: "min",
+    },
+  ],
+  pendingTasks: MOCK_PENDING_TASKS,
+  timelineActivities: [
+    {
+      id: "act_1",
+      time: "07:15",
+      categoryId: "workout",
+      title: "Morning Iron Session",
+      detail: "Upper Body Hypertrophy — 48m, 345 kcal",
+      completed: true,
+    },
+    {
+      id: "act_2",
+      time: "08:30",
+      categoryId: "food",
+      title: "Nutrition & Hydration",
+      detail: "High-protein breakfast + 1L water intake",
+      completed: true,
+    },
+    {
+      id: "act_3",
+      time: "09:00",
+      categoryId: "skincare",
+      title: "Grooming Protocol",
+      detail: "Cleanser, Vitamin C serum & SPF 50 sunscreen",
+      completed: true,
+    },
+    {
+      id: "act_4",
+      time: "10:30",
+      categoryId: "communication",
+      title: "Vocal Projection Drill",
+      detail: "25 min English articulation & vocabulary review",
+      completed: true,
+    },
+    {
+      id: "act_5",
+      time: "14:15",
+      categoryId: "expense",
+      title: "Logged Day Expenses",
+      detail: "Metro commute ₹50 & Paneer protein bowl ₹180",
+      completed: true,
+    },
+    {
+      id: "act_6",
+      time: "16:00",
+      categoryId: "study",
+      title: "Deep Work Focus Block",
+      detail: "React Server Components & TypeScript architecture — 2h 45m",
+      completed: true,
+    },
+  ],
+  goals: MOCK_GOALS,
+};
+
+export const MOCK_WEEKLY_CHART: ProgressChartPoint[] = [
+  { day: "Fri", fullDate: "2026-09-25", progress: 68, studyHours: 2.5, workoutDone: 1, expenses: 420 },
+  { day: "Sat", fullDate: "2026-09-26", progress: 85, studyHours: 4.0, workoutDone: 1, expenses: 650 },
+  { day: "Sun", fullDate: "2026-09-27", progress: 80, studyHours: 3.5, workoutDone: 0, expenses: 890 },
+  { day: "Mon", fullDate: "2026-09-28", progress: 60, studyHours: 2.0, workoutDone: 1, expenses: 310 },
+  { day: "Tue", fullDate: "2026-09-29", progress: 74, studyHours: 3.0, workoutDone: 1, expenses: 450 },
+  { day: "Wed", fullDate: "2026-09-30", progress: 84, studyHours: 3.5, workoutDone: 1, expenses: 280 },
+  { day: "Thu", fullDate: "2026-10-01", progress: 72, studyHours: 2.75, workoutDone: 1, expenses: 380 },
+];
+
+export const MOCK_MONTHLY_CHART: ProgressChartPoint[] = [
+  { day: "Week 1", fullDate: "Sep 01 - 07", progress: 71, studyHours: 18, workoutDone: 5, expenses: 2400 },
+  { day: "Week 2", fullDate: "Sep 08 - 14", progress: 76, studyHours: 21, workoutDone: 6, expenses: 2150 },
+  { day: "Week 3", fullDate: "Sep 15 - 21", progress: 82, studyHours: 24, workoutDone: 5, expenses: 1980 },
+  { day: "Week 4", fullDate: "Sep 22 - 28", progress: 79, studyHours: 22, workoutDone: 6, expenses: 2200 },
+  { day: "Week 5", fullDate: "Sep 29 - Oct 01", progress: 77, studyHours: 9.25, workoutDone: 3, expenses: 1040 },
+];
+
+export const MOCK_YEARLY_CHART: ProgressChartPoint[] = [
+  { day: "Jan", fullDate: "2026-01", progress: 62, studyHours: 65, workoutDone: 20, expenses: 14200 },
+  { day: "Feb", fullDate: "2026-02", progress: 68, studyHours: 72, workoutDone: 22, expenses: 13500 },
+  { day: "Mar", fullDate: "2026-03", progress: 74, studyHours: 80, workoutDone: 24, expenses: 15100 },
+  { day: "Apr", fullDate: "2026-04", progress: 71, studyHours: 75, workoutDone: 21, expenses: 14800 },
+  { day: "May", fullDate: "2026-05", progress: 79, studyHours: 85, workoutDone: 25, expenses: 16200 },
+  { day: "Jun", fullDate: "2026-06", progress: 83, studyHours: 90, workoutDone: 26, expenses: 15400 },
+  { day: "Jul", fullDate: "2026-07", progress: 81, studyHours: 88, workoutDone: 24, expenses: 16000 },
+  { day: "Aug", fullDate: "2026-08", progress: 86, studyHours: 94, workoutDone: 27, expenses: 15800 },
+  { day: "Sep", fullDate: "2026-09", progress: 79, studyHours: 86, workoutDone: 25, expenses: 14900 },
+  { day: "Oct", fullDate: "2026-10", progress: 74, studyHours: 32, workoutDone: 10, expenses: 4200 },
+];
+
+export const MOCK_HEATMAP_DAYS: HeatmapDay[] = Array.from({ length: 35 }).map((_, idx) => {
+  const day = idx + 1;
+  const progress = Math.min(100, Math.max(30, Math.floor(Math.sin(idx * 0.4) * 35 + 65)));
+  const level = progress >= 85 ? 4 : progress >= 70 ? 3 : progress >= 50 ? 2 : progress >= 30 ? 1 : 0;
+  return {
+    date: `2026-09-${String(day > 30 ? day - 30 : day).padStart(2, "0")}`,
+    progress,
+    tasksCount: Math.floor(progress / 10),
+    level: level as 0 | 1 | 2 | 3 | 4,
+  };
+});
